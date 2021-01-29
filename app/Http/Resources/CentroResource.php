@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 class CentroResource extends JsonResource
 {
@@ -14,10 +15,25 @@ class CentroResource extends JsonResource
      */
     public function toArray($request)
     {
-        // return parent::toArray($request);
-        return [
+
+        // Esto no es necesario para que funcione el gates.
+
+        $user = Auth::user();
+
+        $datos = array (
             'id' => $this->id,
-            'nombre' => $this->nombre,
-        ];
+            'nombre' => $this->nombre
+        );
+
+        if ($user->id ==1) {
+
+            $datos['web'] = $this->web;
+
+        }
+
+        return $datos;
+
+        // return parent::toArray($request);
+
     }
 }
