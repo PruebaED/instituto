@@ -17,7 +17,9 @@ class CentroResource extends JsonResource
         // return parent::toArray($request);
         return [
             'id' => $this->id,
+            'codigo' => $this->codigo,
             'nombre' => $this->nombre,
+            'cordinador' => $this->coordinadorCentro, // Se usa como propiedad dinámica, en lugar de como método coordinadorCentro().
         ];
     }
 }

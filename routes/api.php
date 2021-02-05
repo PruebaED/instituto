@@ -21,6 +21,8 @@ use App\Http\Controllers\API\MateriaController;
 use App\Http\Controllers\API\GrupoController;
 use App\Http\Controllers\API\MatriculaController;
 
+use App\Http\Resources\CentroResource;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -53,8 +55,8 @@ Route::post('/tokens/create', function (Request $request) {
 });
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
-    Route::get('/user', function (Request $request) {
-        return $request->user();
+    Route::get('/user', function (Request $request) { // Respuesta inicial: return $request->user();
+        return new CentroResource($request->user()->centroCoordinado); // Se usa como propiedad dinámica, en lugar de como método centroCoordinado().
     });
 
     Route::apiResource('centros', CentroController::class);

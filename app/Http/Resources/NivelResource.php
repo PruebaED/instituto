@@ -18,7 +18,7 @@ class NivelResource extends JsonResource
         return [
             'id' => $this->id,
             'nombre' => $this->nombre,
-            'nivelsuperior' => $this->nivelsuperior,
+            'grupos' => $this->grupos, // Se usa como propiedad dinámica, en lugar de como método grupos().
         ];
     }
 }
