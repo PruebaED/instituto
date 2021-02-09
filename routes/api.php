@@ -56,7 +56,13 @@ Route::post('/tokens/create', function (Request $request) {
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get('/user', function (Request $request) {
+        return new UserResource($request->user());
+    });
+
+    Route::get('miCentro', function (Request $request) {
+
         return new CentroResource($request->user()->centroCoordinado);
+
     });
 
     Route::apiResource('centros', CentroController::class);
