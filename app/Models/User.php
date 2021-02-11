@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use DB;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -61,4 +63,20 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Grupo::class, 'matriculas', 'alumno', 'grupo');
     }
+
+    public function notas() {
+
+        return $this->hasMany(Nota::class);
+    }
+
+    public function serProfesor() {
+
+        return DB::table('materiasimpartidas')->where('docente', Auth::userId())->count() > 0;
+
+        // return Materiaimpartida::where('docente', Auth::userId()->count()) > 0;
+
+        // Si devuelve mayor que 0, el usuario es profesor.
+
+    }
+
 }

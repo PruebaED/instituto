@@ -9,6 +9,8 @@ use Psr\Http\Message\ServerRequestInterface;
 use Tqdev\PhpCrudApi\Api;
 use Tqdev\PhpCrudApi\Config;
 
+use App\Http\Controllers\API\NotaController;
+
 use App\Http\Controllers\API\PeriodoclaseController;
 use App\Models\Peridoclase;
 use App\Http\Controllers\API\CentroController;
@@ -64,6 +66,10 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get('miCentro', function (Request $request) {
         return new CentroResource($request->user()->centroCoordinado);
     });
+
+    Route::apiResource('notas', NotaController::class);
+
+    Route::get('/notas/media/{materia_id}', [NotaController::class, 'notaMediaUsuario']);
 
     Route::apiResource('periodoslectivos', PeriodolectivoController::class)->parameters(['periodoslectivos' => 'periodolectivo']);
     Route::apiResource('anyosescolares', AnyoescolarController::class)->parameters(['anyosescolares' => 'anyoescolar']);

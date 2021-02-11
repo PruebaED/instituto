@@ -10,6 +10,13 @@ class Materia extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nombre',
+        'nombre'
     ];
+
+    public function notas() {
+
+    	return $this->hasMany(Nota::class);
+
+    }
+
 }
