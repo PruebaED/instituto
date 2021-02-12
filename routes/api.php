@@ -23,6 +23,8 @@ use App\Http\Controllers\API\MatriculaController;
 
 use App\Http\Resources\CentroResource;
 
+use App\Http\Controllers\API\CursoController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -63,6 +65,10 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get('/avatar', [\App\Http\Controllers\API\AvatarController::class, 'getAvatar']);
 
     Route::apiResource('centros', CentroController::class);
+
+    Route::apiResource('cursos', CursoController::class);
+
+    Route::get('/cursos/aulavirtual', [\App\Http\Controllers\API\CursoController::class, 'aulavirtual']);
 
     Route::get('miCentro', function (Request $request) {
         return new CentroResource($request->user()->centroCoordinado);
